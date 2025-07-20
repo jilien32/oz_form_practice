@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>설문조사 - 질문 {{ question.sqe }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>MBTI 테스트</h1>
+        <form action="/answers/submit_answer" method="post">
+            <input type="hidden" name="question_id" value="{{ question.id }}">
+            <input type="hidden" name="question_sqe" value="{{ question.sqe }}">
+            <div class="question">
+                <h2>{{ question.title }}</h2>
+                {% if question.image %}
+                <img src="{{ question.image.url }}" alt="Question Image" class="question-image">
+                {% endif %}
+            </div>
+            <ul class="choices">
+                {% for choice in question.choices %}
+                <li>
+                    <label>
+                        <input type="radio" name="choice_id" value="{{ choice.id }}" required>
+                        {{ choice.content }}
+                    </label>
+                </li>
+                {% endfor %}
+            </ul>
+            <button type="submit" class="btn">다음</button>
+        </form>
+    </div>
+</body>
+</html>

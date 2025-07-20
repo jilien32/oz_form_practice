@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBTI 테스트 시작</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .form-group {
+            margin-bottom: 1.5em;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5em;
+            font-weight: 500;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.8em;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MBTI 테스트</h1>
+        <p>간단한 설문을 통해 당신의 MBTI 유형을 알아보세요!</p>
+        <form action="/users/start_survey" method="post" style="margin-top: 2em;">
+            <div class="form-group">
+                <label for="user_name">이름</label>
+                <input type="text" id="user_name" name="user_name" required>
+            </div>
+            <div class="form-group">
+                <label for="user_email">이메일</label>
+                <input type="email" id="user_email" name="user_email" required>
+            </div>
+            <div class="form-group">
+                <label for="user_age">나이</label>
+                <select id="user_age" name="user_age" required>
+                    <option value="teen">10대</option>
+                    <option value="twenty">20대</option>
+                    <option value="thirty">30대</option>
+                    <option value="forty">40대</option>
+                    <option value="fifty">50대</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="user_gender">성별</label>
+                <select id="user_gender" name="user_gender" required>
+                    <option value="male">남성</option>
+                    <option value="female">여성</option>
+                </select>
+            </div>
+            <button type="submit" class="btn">테스트 시작</button>
+        </form>
+    </div>
+</body>
+</html>

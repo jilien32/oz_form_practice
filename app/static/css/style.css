@@ -1,0 +1,135 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+:root {
+    --primary-color: #5c67f2;
+    --background-color: #f0f2f5;
+    --card-background-color: #ffffff;
+    --text-color: #333333;
+    --light-text-color: #666666;
+    --border-color: #e0e0e0;
+    --button-hover-color: #4a54c1;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0.5rem; /* 상단 여백을 0.5rem으로 수정 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    background-color: var(--card-background-color);
+    padding: 2rem 3rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1, h2 {
+    color: var(--primary-color);
+    margin-bottom: 0.5em;
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 1.5em;
+    color: var(--text-color);
+    margin-bottom: 1.5em;
+}
+
+p {
+    color: var(--light-text-color);
+    line-height: 1.6;
+}
+
+.question-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 2em;
+}
+
+.choices {
+    list-style: none;
+    padding: 0;
+    margin: 2em 0;
+    text-align: left;
+}
+
+.choices li {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1em;
+    margin-bottom: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.choices li:hover {
+    background-color: #e9eaf8;
+    border-color: var(--primary-color);
+}
+
+.choices label {
+    display: block;
+    width: 100%;
+    cursor: pointer;
+}
+
+.choices input[type="radio"] {
+    margin-right: 1em;
+}
+
+.btn {
+    display: inline-block;
+    width: 100%;
+    padding: 1em;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: #fff;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--button-hover-color);
+}
+
+/* Result Page */
+.mbti-type {
+    font-size: 3.5em;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0.5em 0;
+}
+
+.mbti-description {
+    font-size: 1.1em;
+    color: var(--text-color);
+    margin-bottom: 2em;
+}
+
+.mbti-result-image {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 2em;
+}

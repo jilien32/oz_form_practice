@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>설문조사 통계</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: sans-serif; margin: 2em; }
+        h1 { text-align: center; }
+        h2 { margin-top: 2em; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1em; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .chart-container { width: 80%; margin: 2em auto; }
+    </style>
+</head>
+<body>
+    <h1>설문조사 통계</h1>
+
+    {% if error_message %}
+    <p style="color: red;">오류 발생: {{ error_message }}</p>
+    {% else %}
+    <h2>각 질문당 선택지 선택 비율</h2>
+    <div class="chart-container">
+        <canvas id="answerRateByChoiceChart"></canvas>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>질문 ID</th>
+                <th>선택지 ID</th>
+                <th>선택 횟수</th>
+                <th>비율 (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in answer_rate_by_choice %}
+            <tr>
+                <td>{{ item.question_id }}</td>
+                <td>{{ item.choice_id }}</td>
+                <td>{{ item.answer_count }}</td>
+                <td>{{ item.percentage }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>모든 질문에 대한 각 선택지의 선택 횟수 및 비율</h2>
+    <div class="chart-container">
+        <canvas id="answerCountByQuestionChart"></canvas>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>질문 ID</th>
+                <th>선택지 ID</th>
+                <th>선택 횟수</th>
+                <th>비율 (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in answer_count_by_question %}
+            <tr>
+                <td>{{ item.question_id }}</td>
+                <td>{{ item.choice_id }}</td>
+                <td>{{ item.answer_count }}</td>
+                <td>{{ item.percentage }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        // 데이터 준비
+        const answerRateByChoiceData = {{ answer_rate_by_choice | tojson }};
+        const answerCountByQuestionData = {{ answer_count_by_question | tojson }};
+
+        // 각 질문당 선택지 선택 비율 그래프
+        const answerRateByChoiceCtx = document.getElementById('answerRateByChoiceChart').getContext('2d');
+        const answerRateByChoiceLabels = answerRateByChoiceData.map(item => `Q${item.question_id} - C${item.choice_id}`);
+        const answerRateByChoicePercentages = answerRateByChoiceData.map(item => item.percentage);
+
+        new Chart(answerRateByChoiceCtx, {
+            type: 'bar',
+            data: {
+                labels: answerRateByChoiceLabels,
+                datasets: [{
+                    label: '선택 비율 (%)',
+                    data: answerRateByChoicePercentages,
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '비율 (%)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // 모든 질문에 대한 각 선택지의 선택 횟수 및 비율 그래프
+        const answerCountByQuestionCtx = document.getElementById('answerCountByQuestionChart').getContext('2d');
+        const answerCountByQuestionLabels = answerCountByQuestionData.map(item => `Q${item.question_id} - C${item.choice_id}`);
+        const answerCountByQuestionPercentages = answerCountByQuestionData.map(item => item.percentage);
+
+        new Chart(answerCountByQuestionCtx, {
+            type: 'bar',
+            data: {
+                labels: answerCountByQuestionLabels,
+                datasets: [{
+                    label: '선택 비율 (%)',
+                    data: answerCountByQuestionPercentages,
+                    backgroundColor: 'rgba(153, 102, 255, 0.6)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '비율 (%)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+    {% endif %}
+</body>
+</html>

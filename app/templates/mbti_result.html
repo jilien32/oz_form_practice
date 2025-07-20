@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBTI 분석 결과</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>MBTI 분석 결과</h1>
+        {% if has_character %}
+        <img src="{{ mbti_image_url }}" alt="MBTI 결과 이미지" class="mbti-result-image">
+        {% endif %}
+        <p class="mbti-type">{{ mbti_type }}</p>
+        <p class="mbti-description">{{ mbti_description }}</p>
+        <a href="{{ url_for('stats_routes.user_answer_rate') }}" class="btn">통계 페이지로 이동</a>
+    </div>
+</body>
+</html>
