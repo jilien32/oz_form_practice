@@ -134,7 +134,7 @@ def analyze_mbti():
     "ISFP": "자유롭고 감성적인 예술가. 조용하지만 섬세한 미적 감각과 감정의 깊이를 지닌 성향입니다. (베이비)",
     "INFP": "이상과 가치로 움직이는 중재자. 내면의 신념과 감정을 따르며 조용히 타인을 위로합니다. (더피)",
     "INTP": "호기심 많은 사색가. 복잡한 개념을 즐기고 논리로 세상을 이해하려는 지적 탐구자입니다. (미스터리)",
-    "ESTP": "현실적이고 모험적인 행동파. 도전을 두려워하지 않고 순간을 즐기는 에너지 넘치는 성향입니다. (매비)",
+    "ESTP": "현실적이고 모험적인 행동파. 도전을 두려워하지 않고 순간을 즐기는 에너지 넘치는 성향입니다. (애비)",
     "ESFP": "주목받는 걸 즐기는 분위기 메이커. 밝고 사교적이며 모두에게 즐거움을 주는 성격입니다. (로맨스)",
     "ENFP": "창의적이고 열정적인 아이디어 뱅크. 새로운 사람과 경험을 좋아하며 에너지와 감성이 풍부합니다. (조이)",
     "ENTP": "도전을 즐기고 아이디어가 넘치는 혁신가. 논쟁을 즐기며 재치 있는 변화를 이끄는 리더형입니다. (진우)",
@@ -148,7 +148,10 @@ def analyze_mbti():
     has_character = "(해당 캐릭터 없음)" not in mbti_description
 
     image_filename = f"{mbti_type}.png"
-    image_path = os.path.join(os.path.dirname(__file__), '..\static\images', image_filename)
+    image_path = os.path.join(
+    os.path.dirname(__file__),
+    '..', 'static', 'images', image_filename
+)
 
     if os.path.exists(image_path):
         mbti_image_url = url_for('static', filename=f'images/{image_filename}')
