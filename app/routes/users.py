@@ -1,4 +1,4 @@
-from flask import request, jsonify, redirect, url_for, session
+from flask import request, jsonify, redirect, url_for, session, render_template
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from marshmallow import Schema, fields
@@ -37,13 +37,10 @@ class UserList(MethodView):
         return user
 
 
-@user_blp.route("/<int:user_id>")
-class UserResource(MethodView):
-    @user_blp.response(200, UserSchema)
-    def get(self, user_id):
-        """ID로 특정 사용자 조회"""
-        user = User.query.get_or_404(user_id)
-        return user
+@user_blp.route("/signup")
+def signup_page():
+    """회원가입 페이지 렌더링"""
+    return render_template("signup.html")
 
 
 @user_blp.route("/start_survey", methods=["POST"])

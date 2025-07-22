@@ -84,12 +84,19 @@ def analyze_mbti():
     mbti_scores = {"E": 0, "I": 0, "S": 0, "N": 0, "T": 0, "F": 0, "J": 0, "P": 0}
 
     # 질문 sqe별로 MBTI 성향 매핑
+    # mbti_mapping = {
+    #     1: {1: "E", 2: "E", 3: "I", 4: "I"},
+    #     2: {1: "S", 2: "S", 3: "N", 4: "N"},
+    #     3: {1: "T", 2: "T", 3: "F", 4: "F"},
+    #     4: {1: "J", 2: "J", 3: "P", 4: "P"},
+    #     5: {1: "N", 2: "S", 3: "F", 4: "T"},  # 보조 질문
+    # }
+
     mbti_mapping = {
-        1: {1: "E", 2: "E", 3: "I", 4: "I"},
-        2: {1: "S", 2: "S", 3: "N", 4: "N"},
-        3: {1: "T", 2: "T", 3: "F", 4: "F"},
-        4: {1: "J", 2: "J", 3: "P", 4: "P"},
-        5: {1: "N", 2: "S", 3: "F", 4: "T"},  # 보조 질문
+        1: {1: "E", 2: "I"},
+        2: {1: "S", 2: "N"},
+        3: {1: "T", 2: "F"},
+        4: {1: "J", 2: "P"},
     }
 
     for answer in user_answers:
@@ -113,6 +120,10 @@ def analyze_mbti():
         ("T" if mbti_scores["T"] >= mbti_scores["F"] else "F") +
         ("J" if mbti_scores["J"] >= mbti_scores["P"] else "P")
     )
+
+    # 이미지가 없는 MBTI 유형을 이미지가 있는 유형으로 변경
+    if mbti_type in ["ISFJ", "ESTJ", "ENFJ", "ENTJ"]:
+        mbti_type = mbti_type[:-1] + "P"
 
     mbti_descriptions = {
     "ISTJ": "신중하고 책임감 있는 원칙주의자. 조직과 규칙을 존중하며 계획적으로 움직이는 완벽주의자입니다. (셀린)",
